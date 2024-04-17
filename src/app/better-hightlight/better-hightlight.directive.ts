@@ -1,6 +1,7 @@
 import {
   Directive,
   ElementRef,
+  HostBinding,
   HostListener,
   OnInit,
   Renderer2,
@@ -10,6 +11,8 @@ import {
   selector: '[appBetterHightlight]',
 })
 export class BetterHightlightDirective implements OnInit {
+  @HostBinding('style.backgroundColor') backgroundColor: string = 'transparent';
+
   constructor(private elRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {
@@ -22,19 +25,23 @@ export class BetterHightlightDirective implements OnInit {
 
   @HostListener('mouseenter') mouseOver(eventDate: Event) {
     console.log(eventDate);
-    this.renderer.setStyle(
-      this.elRef.nativeElement,
-      'background-color',
-      'blue'
-    );
+    // this.renderer.setStyle(
+    //   this.elRef.nativeElement,
+    //   'background-color',
+    //   'blue'
+    // );
+
+    this.backgroundColor = 'blue';
   }
 
   @HostListener('mouseleave') mouseLeave(eventDate: Event) {
     console.log(eventDate);
-    this.renderer.setStyle(
-      this.elRef.nativeElement,
-      'background-color',
-      'transparent'
-    );
+    // this.renderer.setStyle(
+    //   this.elRef.nativeElement,
+    //   'background-color',
+    //   'transparent'
+    // );
+
+    this.backgroundColor = 'transparent';
   }
 }
